@@ -1,0 +1,8 @@
+#!/bin/bash
+cd ./leaflyURLScraper
+scrapy crawl leaflyURLs
+cp ./urls.txt ../LeaflyScrapy
+cd ../LeaflyScrapy
+sed -i -e "1d" ./urls.txt
+scrapy crawl leafly
+mv leafly_items.csv ..

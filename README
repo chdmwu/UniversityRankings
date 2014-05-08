@@ -1,0 +1,8 @@
+put the urls of the pages with the school rank that you want into urls.txt,
+then run
+
+./scrape.sh
+
+Output will be in ranking_items.csv
+
+See the provided urls.txt to see an example.

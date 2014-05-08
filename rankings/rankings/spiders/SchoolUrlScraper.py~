@@ -1,0 +1,24 @@
+from scrapy.spider import Spider
+from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.selector import Selector
+from scrapy.http import Request
+from items import *
+import time
+
+class RankingsSpider(Spider):
+    name = "rankingsUrls"
+    allowed_domains = ["http://www.timeshighereducation.co.uk"]
+    with open('./urls.txt') as f:
+        start_urls = f.read().splitlines()
+        
+        
+    def parse(self, response):
+        sel = Selector(response)
+        urls = sel.xpath('//td[@class="uni"]/a/@href').extract()
+        f = open('./schools.txt', 'w+')
+        for url in urls:
+            f.write("http://www.timeshighereducation.co.uk"+url+'\n')
+        return None
+    
+        
+        

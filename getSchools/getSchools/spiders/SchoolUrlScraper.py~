@@ -1,0 +1,22 @@
+from scrapy.spider import Spider
+from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.selector import Selector
+from scrapy.http import Request
+
+class RankingsUrlSpider(Spider):
+    name = "schools"
+    allowed_domains = ["http://www.timeshighereducation.co.uk"]
+    with open('./urls.txt') as f:
+        start_urls = f.read().splitlines()
+    self.fl = open('./schools.txt', 'w+')
+        
+        
+    def parse(self, response):
+        sel = Selector(response)
+        urls = sel.xpath('//td[@class="uni"]/a/@href').extract()
+        for url in urls:
+            self.fl.write("http://www.timeshighereducation.co.uk"+url+'\n')
+        return None
+    
+        
+        
